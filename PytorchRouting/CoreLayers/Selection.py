@@ -54,7 +54,7 @@ class Selection(nn.Module):
             if i not in actions:
                 continue
             # computing the mask as the currently active action on the active trajectories
-            m = ((actions == i) * mask)
+            m = torch.gt(((actions == i) * mask),0)
             if not any(m):
                 continue
             ys[m] = self._submodules[i](xs[m])

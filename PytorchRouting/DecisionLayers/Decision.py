@@ -131,7 +131,7 @@ class Decision(nn.Module, metaclass=abc.ABCMeta):
             if i not in prior_actions:
                 continue
             # computing the mask as the currently computed agent on the active trajectories
-            m = ((prior_actions == i) * mask)
+            m = torch.gt(((prior_actions == i) * mask),0)
             if not any(m):
                 continue
             # selecting the actions
